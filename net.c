@@ -164,7 +164,7 @@ int net_softirq_handler(void){
     struct net_protocol *proto;
     struct net_protocol_queue_entry *entry;
 
-    for(proto = protocols; proto; proto->next){
+    for(proto = protocols; proto; proto = proto->next){
         while(1){
             entry = queue_pop(&proto->queue);
             if(!entry){
