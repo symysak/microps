@@ -8,7 +8,24 @@
 		"files.associations": {
 			"array": "c",
 			"string": "c",
-			"string_view": "c"
-		}
+			"string_view": "c",
+			"icmp.h": "c"
+		},
+		"makefile.launchConfigurations": [
+			{
+				"cwd": "/home/yoshi/microps/test",
+				"binaryPath": "/home/yoshi/microps/test/step8.exe",
+				"binaryArgs": []
+			},
+			{
+				"cwd": "/home/yoshi/microps/test",
+				"binaryPath": "/home/yoshi/microps/test/step11.exe",
+				"binaryArgs": []
+			}
+		]
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": []
 	}
 }
