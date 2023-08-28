@@ -134,6 +134,7 @@ static int ether_tap_isr(unsigned int irq, void *id){
     pfd.fd = PRIV(dev)->fd;
     pfd.events = POLLIN;
     while(1){
+        //debugf("while now...");
         ret = poll(&pfd, 1, 0);
         if(ret == -1){
             if(errno == EINTR){
@@ -148,6 +149,7 @@ static int ether_tap_isr(unsigned int irq, void *id){
         }
         ether_input_helper(dev, ether_tap_read);
     }
+    //debugf("ended");
     return 0;
 }
 

@@ -26,6 +26,11 @@
 				"cwd": "/home/yoshi/microps/test",
 				"binaryPath": "/home/yoshi/microps/test/step13.exe",
 				"binaryArgs": []
+			},
+			{
+				"cwd": "/home/yoshi/microps/test",
+				"binaryPath": "/home/yoshi/microps/test/step14.exe",
+				"binaryArgs": []
 			}
 		]
 	},
