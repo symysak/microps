@@ -10,6 +10,7 @@
 #include "util.h"
 #include "net.h"
 #include "ip.h"
+#include "arp.h"
 
 struct ip_hdr {
     uint8_t vhl;
@@ -266,8 +267,10 @@ static int ip_output_device(struct ip_iface *iface, const uint8_t *data, size_t 
 
         }
         else{
-            errorf("arp does not implement");
-            return -1;
+            int tmp = arp_resolve(NET_IFACE(iface), dst, hwaddr);
+            if(tmp != ARP_RESOLVE_FOUND){
+                return tmp;
+            }
         }
     }
 
@@ -320,7 +323,7 @@ ip_generate_id(void)
 // ipのパケットを出す際に呼び出すおおもとの関数
 ssize_t ip_output(uint8_t protocol, const uint8_t *data, size_t len, ip_addr_t src, ip_addr_t dst){
     struct ip_iface *iface;
-    char addr[IP_ADDR_STR_LEN];
+    //char addr[IP_ADDR_STR_LEN];
     uint16_t id;
     
     if(src == IP_ADDR_ANY){
