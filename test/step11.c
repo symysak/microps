@@ -73,7 +73,7 @@ int main(int argc, char *argv[]){
             errorf("icmp_output() failure");
             break;
         }
-        sleep(5);
+        sleep(1);
     }
 
     cleanup();

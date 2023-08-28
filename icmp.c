@@ -91,7 +91,7 @@ void icmp_input(const uint8_t *data, size_t len, ip_addr_t src, ip_addr_t dst, s
         return;
     }
     if(cksum16((uint16_t *)data, len, 0) != 0){
-        errorf("checksum error, sum=0x%04x, verify=0x%04x", ntoh16(hdr->sum), ntoh16(cksum16((uint16_t *)data, len, -hdr->sum)));
+        errorf("checksum error, sum=0x%04x, verify=0x%04x", ntoh16(hdr->sum), ntoh16(cksum16((uint16_t *)data, len, hdr->sum)));
         return;
     }
 
@@ -121,6 +121,7 @@ int icmp_output(uint8_t type, uint8_t code, uint32_t values, const uint8_t *data
     hdr = (struct icmp_hdr *)buf;
     hdr->type = type;
     hdr->code = code;
+    hdr->sum = 0;
     hdr->values = values;
     memcpy(hdr+1, data, len);
     msg_len = sizeof(*hdr) + len;
