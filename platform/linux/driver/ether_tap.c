@@ -136,7 +136,7 @@ static int ether_tap_isr(unsigned int irq, void *id){
     while(1){
         ret = poll(&pfd, 1, 0);
         if(ret == -1){
-            if(errno = EINTR){
+            if(errno == EINTR){
                 continue; // シグナルに割り込まれたという回復可能なエラー
             }
             errorf("poll: %s, dev=%s", strerror(errno), dev->name);
