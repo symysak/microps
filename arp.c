@@ -147,7 +147,7 @@ static struct arp_cache *arp_cache_update(ip_addr_t pa, const uint8_t *ha){
     }
     cache->state = ARP_CACHE_STATE_RESOLVED;
     cache->pa = pa;
-    memcpy(cache->ha, ha, sizeof(ETHER_ADDR_LEN));
+    memcpy(cache->ha, ha, ETHER_ADDR_LEN);
     gettimeofday(&cache->timestamp, NULL);
     debugf("UPDATE: pa=%s, ha=%s", ip_addr_ntop(pa, addr1, sizeof(addr1)), ether_addr_ntop(ha, addr2, sizeof(addr2)));
     return cache;
@@ -164,7 +164,7 @@ static struct arp_cache *arp_cache_insert(ip_addr_t pa, const uint8_t *ha){
     }
     cache->state = ARP_CACHE_STATE_RESOLVED;
     cache->pa = pa;
-    memcpy(cache->ha, ha, sizeof(ETHER_ADDR_LEN));
+    memcpy(cache->ha, ha, ETHER_ADDR_LEN);
     gettimeofday(&cache->timestamp, NULL);
     debugf("INSERT: pa=%s, ha=%s", ip_addr_ntop(pa, addr1, sizeof(addr1)), ether_addr_ntop(ha, addr2, sizeof(addr2)));
     return cache;
@@ -179,10 +179,10 @@ static int arp_request(struct net_iface *iface, ip_addr_t tpa){
     request.hdr.hln = ETHER_ADDR_LEN;
     request.hdr.pln = IP_ADDR_LEN;
     request.hdr.op = hton16(ARP_OP_REQUEST);
-    memcpy(&request.spa, &((struct ip_iface *)iface)->unicast, sizeof(request.spa));
-    memcpy(&request.sha, iface->dev->addr, sizeof(request.sha));
-    memcpy(&request.tpa, &tpa, sizeof(request.tpa));
-    memcpy(&request.tha, ETHER_ADDR_BROADCAST, sizeof(request.tha));
+    memcpy(&request.spa, &((struct ip_iface *)iface)->unicast, IP_ADDR_LEN);
+    memcpy(&request.sha, iface->dev->addr, ETHER_ADDR_LEN);
+    memcpy(&request.tpa, &tpa, IP_ADDR_LEN);
+    memcpy(&request.tha, ETHER_ADDR_BROADCAST, ETHER_ADDR_LEN);
 
     debugf("dev=%s, len=%zu", iface->dev->name, sizeof(request));
     arp_dump((uint8_t *)&request, sizeof(request));
