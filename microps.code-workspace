@@ -9,7 +9,8 @@
 			"array": "c",
 			"string": "c",
 			"string_view": "c",
-			"icmp.h": "c"
+			"icmp.h": "c",
+			"ether_tap.h": "c"
 		},
 		"makefile.launchConfigurations": [
 			{
